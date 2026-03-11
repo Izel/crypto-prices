@@ -68,7 +68,7 @@ The pipeline performs the following steps:
 4. **Write structured data to BigQuery**
 
 Example of the received event:   
-``` json
+``` JSON
 {
 "type":"ticker",
 "sequence":123894075370,
@@ -90,7 +90,7 @@ Example of the received event:
 }
 ```
 Example of the data after preprocesing (DoFn)
-``` json
+``` JSON
 {
 "trade_id":978694534,
 "symbol": "BTC-USD", 
@@ -137,19 +137,20 @@ python crypto_pipeline.py \
  --worker_machine_type e2-standard-2 
  --job_name=PIPELINE_NAME
 ```
-### Common Errors
 > [!IMPORTANT]
 > The error *ZONE_RESOURCE_POOL_EXHAUSTED* is a common error related to availability of resources in the selected region. Try to run the pipeline in a [different zone](https://docs.cloud.google.com/compute/docs/regions-zones), even if it is different to the zone chosen for the project, but not too far, at least not an intercontinental region, to avoid high charges. Other alternative is to use a different type of machine for `worker_machine_type` parameter. 
 
+---
+
 ### Graphs
 
-![Pipeline graph](assets/img/pipeline_graph.png)\
+![Pipeline graph](assets/img/pipeline_graph.png)
 *The pipeline graph*
 
-![BQ table as sink](assets/img/sink.png) \
+![BQ table as sink](assets/img/sink.png)
 *The sink as a BQ table*
 
-![BQ table for dead letter](assets/img/dead_letter.png)\
+![BQ table for dead letter](assets/img/dead_letter.png)
 *The dead letter sink as a BQ table*
 
 ---
