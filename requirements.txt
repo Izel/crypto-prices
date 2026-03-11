@@ -1,4 +1,5 @@
 apache-beam[gcp]
 google-cloud-pubsub
 google-cloud-bigquery
+google-crc32c
 python-dotenv   
