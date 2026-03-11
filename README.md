@@ -125,17 +125,17 @@ Example of the data after preprocesing (DoFn)
 `python crypto_pipeline.py --runner DirectRunner`
 
 ### Deploy to Dataflow
-Use the command below to submit the pipeline to cloud.  Provide a name to easily identify your pipeline job by replacing `PIPELINE_NAME`, otherwise, Dataflow will set a random unfriendly name.
+Use the command below to submit the pipeline to cloud.  Provide a name to easily identify your pipeline job by replacing `PIPELINE_NAME`, otherwise, Dataflow will set a random unfriendly name. You can use the same bucket for `--temp_location` and `--staging_location` but create different folders for each one.
 ``` bash
 python crypto_pipeline.py \                                                                                                         
  --runner DataflowRunner \
- --project crypto-prices-22175 \
- --region YOUR_REGION \
- --temp_location gs://crypto-prices-22175/temp \
- --staging_location gs://crypto-prices-22175/staging \
+ --project <YOUR_PROJECT_ID> \
+ --region <YOUR_REGION> \
+ --temp_location <YOUR_BUCKET>/temp \
+ --staging_location <YOUR_BUCKET>/staging \
  --max_num_workers 1 \
  --worker_machine_type e2-standard-2 
- --job_name=PIPELINE_NAME
+ --job_name=<PIPELINE_NAME>
 ```
 > [!IMPORTANT]
 > The error *ZONE_RESOURCE_POOL_EXHAUSTED* is a common error related to availability of resources in the selected region. Try to run the pipeline in a [different zone](https://docs.cloud.google.com/compute/docs/regions-zones), even if it is different to the zone chosen for the project, but not too far, at least not an intercontinental region, to avoid high charges. Other alternative is to use a different type of machine for `worker_machine_type` parameter. 
