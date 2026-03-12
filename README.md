@@ -18,15 +18,7 @@ Crypto Stream Producer
 → BigQuery  
 → Analytics / SQL queries
 
-```mermaid
-graph TD;
-
-A[Crypto Stream Producer] --> B[Pub/Sub Topic];
-B --> C[Dataflow Streaming Pipeline];
-C --> D[Data Transformation];
-D --> E[BigQuery Data Warehouse];
-E --> F[SQL Analytics / Dashboard];
-```
+<img src="assets/img/architecture.png" alt="Architecture diagram" width="500" height="400">
 
 ---
 
@@ -46,8 +38,6 @@ E --> F[SQL Analytics / Dashboard];
 │  
 ├── src  
 │ ├── crypto_pipeline.py  
-│ ├── transforms.py  
-│ └── schemas.py  
 │  
 ├── requirements.txt  
 │  
