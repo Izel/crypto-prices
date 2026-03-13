@@ -110,6 +110,17 @@ Example of the data after preprocesing (DoFn)
 
 `pip install -r requirements.txt`
 
+### Application Key
+
+1. Crate a SA to avoid using your personal account email to run the pipeline.
+2. Add the role `bb` to run the Dataflow Service Account
+3. Generate a JSON key and store it in your local machine
+4. Create an enviroment variable `GOOGLE_APPLICATION_CREDENTIALS` with your JSON path.
+
+``` bash
+export GOOGLE_APPLICATION_CREDENTIALS=<KEY_TO_JSON_FILE>  # Linux
+```
+
 ### Run locally
 
 `python crypto_pipeline.py --runner DirectRunner`
@@ -144,6 +155,62 @@ python crypto_pipeline.py \
 *The dead letter sink as a BQ table*
 
 ---
+
+## Analytics Dashboard
+
+A real-time dashboard was created using Looker Studio to visualize cryptocurrency price trends.
+
+The dashboard includes:
+
+- Price per minute (trend over time)
+- Volume operations per crypto currency (Buy vs Sell)
+- Market Sentiment (Buy vs Sell ratio)
+- Average price by Operation
+- Percentage of operations per crypto currency
+
+The dashboard is powered by a BigQuery analytics view that aggregates streaming data by minute.
+
+
+### Price per minute (trend over time)
+
+**Configuration**
+- Type: Time series
+- Dimension: `minute` 
+- Breakdown dimension: `symbol` 
+- Metric: `avg_price` 
+
+**Shows**
+1. Market trends and evolution evolución del precio
+2. How market is reacting
+
+### Volume operations per crypto currency (Buy vs Sell)
+
+**Configuration**
+- Type: Stacked Bar Chart
+- Dimension: `minute` 
+- Breakdown: `operation` 
+- Metric: `COUNT(symbol)` 
+
+**Shows**
+Buy vs sell volume
+
+### Market Sentiment (Buy Vs Sell Ratio)
+- Type: Pie chart
+- Dimension: `operation` 
+- Metric: `COUNT(symbol)`
+
+**Shows**
+Market sentiment
+
+### Average price by operation
+
+- Type: Bar chart
+- Dimension: `operation`
+- Metric: `AVG(avg_price)`
+
+**Shows**
+How different are the buy prices vs sale prices
+
 
 ## Example Analytics Query
 ``` SQL
