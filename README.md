@@ -159,6 +159,7 @@ python crypto_pipeline.py \
 ## Analytics Dashboard
 
 A real-time dashboard was created using Looker Studio to visualize cryptocurrency price trends.
+![Analytics Documentation](analytics/README.md)
 
 The dashboard includes:
 
