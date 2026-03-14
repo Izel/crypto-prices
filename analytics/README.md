@@ -12,7 +12,7 @@ The dashboard includes:
 
 The dashboard is powered by a BigQuery analytics view that aggregates streaming data by minute.
 
-```
+```SQL
 CREATE OR REPLACE VIEW `crypto-prices-22175.cryptos.crypto_price_analytics_minute` AS
 SELECT
   symbol, operation, 
@@ -30,8 +30,10 @@ GROUP BY symbol, operation, minute
 - Breakdown dimension: `symbol` 
 - Metric: `avg_price` 
 
+<img src="../assets/img/analytics/price_per_minute.png">
+
 **Shows**
-1. Market trends and evolution evolución del precio
+1. Market trends and price evolution 
 2. How market is reacting
 
 ## Volume operations per crypto currency (Buy vs Sell)
@@ -42,6 +44,8 @@ GROUP BY symbol, operation, minute
 - Breakdown: `operation` 
 - Metric: `COUNT(symbol)` 
 
+<img src="../assets/img/analytics/volume_operation_currency.png">
+
 **Shows**
 Buy vs sell volume
 
@@ -49,6 +53,8 @@ Buy vs sell volume
 - Type: Pie chart
 - Dimension: `operation` 
 - Metric: `COUNT(symbol)`
+
+<img src="../assets/img/analytics/market_sentiment.png">
 
 **Shows**
 Market sentiment
@@ -59,16 +65,9 @@ Market sentiment
 - Dimension: `operation`
 - Metric: `AVG(avg_price)`
 
+<img src="../assets/img/analytics/avg_price_operation.png">
+
 **Shows**
 How different are the buy prices vs sale prices
 
 
-## Example Analytics Query
-``` SQL
-SELECT
-symbol, 
-AVG(price) as avg_price
-FROM prices
-WHERE event_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 5 MINUTE)
-GROUP BY symbol
-```
