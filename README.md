@@ -180,5 +180,5 @@ Possible improvements to the pipeline:
 * ~Add data validation~
 * ~Implement dead-letter queues~
 * Add monitoring and alerting
-* Add ML-based anomaly detection
+* ~Add Looker dashboard~
 * Add Terraform
