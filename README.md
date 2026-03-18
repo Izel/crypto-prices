@@ -1,16 +1,15 @@
 # Real-Time Crypto Data Pipeline (GCP)
 
-This project implements a **real-time data processing pipeline** that ingests cryptocurrency market data, processes it using a streaming pipeline, and stores it for analytics.
-
+This project demonstrates a production-style real-time streaming pipeline on **GCP**. It ingests live cryptocurrency market data via **Pub/Sub**, processes it using Apache Beam on **Dataflow** (including dead-letter handling for malformed events), and persists structured data to **BigQuery** for analytics via **Looker Studio**  
 The system is built using **Google Cloud Platform managed services** and follows a modern streaming data architecture.
 
 ---
 
 ## Architecture Overview
 
-The pipeline processes streaming crypto price events in real time.
+The pipeline processes streaming messages produced by crypto price events (Buy and Sell) in real time.
 
-Data flow:
+### Data flow:
 
 Crypto Stream Producer  
 → Pub/Sub  
@@ -30,21 +29,7 @@ Crypto Stream Producer
 * Google Cloud Pub/Sub
 * Google BigQuery
 * Google Cloud Storage
-
----
-
-## Repository Structure
-
-│  
-├── src  
-│ ├── crypto_pipeline.py  
-│  
-├── requirements.txt  
-│  
-├── architecture  
-│ └── architecture.md  
-│  
-└── README.md  
+* Looker Studio
 
 ---
 
@@ -54,10 +39,10 @@ The pipeline performs the following steps:
 
 1. **Ingest streaming data** from Pub/Sub
 2. **Parse JSON messages**
-3. **Validate and transform events**
+3. **Validate and transform events** 
 4. **Write structured data to BigQuery**
 
-Example of the received event:   
+Example of received event:   
 ``` JSON
 {
 "type":"ticker",
@@ -118,7 +103,7 @@ Example of the data after preprocesing (DoFn)
 4. Create an enviroment variable `GOOGLE_APPLICATION_CREDENTIALS` with your JSON path.
 
 ``` bash
-export GOOGLE_APPLICATION_CREDENTIALS=<KEY_TO_JSON_FILE>  # Linux
+export GOOGLE_APPLICATION_CREDENTIALS=<KEY_TO_JSON_FILE>  # For Linux systems
 ```
 
 ### Run locally
@@ -144,21 +129,22 @@ python crypto_pipeline.py \
 ---
 
 ### Graphs
+*The pipeline*\
+<img src="assets/img/pipeline_graph.png" alt="The pipeline graph." width="370" height="300">
 
-![Pipeline graph](assets/img/pipeline_graph.png)
-*The pipeline graph*
-
+*The sink as a BQ table*\
 ![BQ table as sink](assets/img/sink.png)
-*The sink as a BQ table*
 
+
+*The dead letter sink as a BQ table*\
 ![BQ table for dead letter](assets/img/dead_letter.png)
-*The dead letter sink as a BQ table*
+
 
 ---
 
 # Analytics Dashboard
 
-A ![real-time dashboard]("analytics/README.md") was created using **Looker Studio** to visualize cryptocurrency price trends. 
+A ![real-time dashboard]("analytics/README.md") was created using **Looker Studio** to visualise cryptocurrency price trends. 
 
 ---
 
@@ -177,8 +163,8 @@ This architecture can be used for:
 
 Possible improvements to the pipeline:
 
-* ~Add data validation~
-* ~Implement dead-letter queues~
-* Add monitoring and alerting
-* ~Add Looker dashboard~
-* Add Terraform
+* Add data validation :white_check_mark:
+* Implement dead-letter queues :white_check_mark:
+* Add monitoring and alerting :construction:
+* Add Looker dashboard :white_check_mark:
+* Add Terraform :construction:
